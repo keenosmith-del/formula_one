@@ -1,0 +1,1563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formula 1</title>
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <style>
+
+        section {
+            margin: 0;
+        }
+
+        /* Change font*/
+        html, body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* Resize headings */
+        h1, h2, h3 {
+            font-weight: 500;
+            letter-spacing: -0.5px;
+            margin-top: 0;
+        }
+
+        /* Add heading colours */
+        h2 {
+            color: #36454f;
+        }
+
+        h3 {
+            color: #283039;
+        }
+
+        h1 {
+            color: #656675;
+        }
+
+        p {
+            font-weight: 400;
+            line-height: 1.7;
+            color: #36454f;
+        }
+
+        .navbar {
+            display: flex;
+            gap: 20px;
+            padding: 15px 20px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-size: 10px;
+        }
+
+        .navbar a {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .navbar span {
+            padding: 8px 20px;
+            border: 1.5px solid white;
+            border-radius: 999px;
+            color: white;
+            font-weight: 250;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .navbar a:hover span {
+            color: black;
+            background-color: white;
+        }
+
+        /* Set background colour */
+        body {
+            background-color: black;
+            color: white;
+        }
+
+        /* Change paragraph colour */
+        p {
+            font-weight: 400;
+            line-height: 1.7;
+            color: #656675;
+        }
+
+        /* MAIN */
+        .cover {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0;
+        }
+
+        .cover-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+        }
+
+        .cover-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.45);
+            z-index: 1;
+        }
+
+        .cover-title {
+            position: relative;
+            z-index: 2;
+            font-size: clamp(48px, 8vw, 120px);
+            font-weight: 500;
+            letter-spacing: -1.5px;
+            text-transform: uppercase;
+            color: white;
+            animation: fadeIn 1.2s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ABOUT */
+        /* Adjust text alignment */
+        /* Add / adjust maergins and padding done EXTENSIVELY */
+        .about {
+            position: relative;
+            min-height: auto;
+            padding: 140px 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 80px;
+        }
+
+        .about::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: url("images/background_4.jpeg") center / cover no-repeat;
+            opacity: 0.25;
+            z-index: 0;
+        }
+
+        .about::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.65);
+            z-index: 1;
+        }
+
+        .about-container {
+            position: relative;
+            z-index: 2;
+            max-width: 1000px;
+            width: 100%;
+            text-align: center;
+        }
+      
+        .about-container h2 {
+            font-size: 40px;
+            font-weight: 500;
+            letter-spacing: -0.8px;
+            margin-bottom: 32px;
+        }
+
+        .about-container p {
+            font-size: 16px;
+            line-height: 1.8;
+            font-weight: 400;
+            text-align: justify;
+        }
+
+        /* HISTORY */
+        .history {
+            position: relative;
+            min-height: auto;
+            padding: 100px 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: -10px;
+        }
+
+        .history::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: url("images/background_3.jpeg") center / cover no-repeat;
+            opacity: 0.25;
+            z-index: 0;
+        }
+
+        .history::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.65);
+            z-index: 1;
+        }
+
+        .history-container {
+            position: relative;
+            z-index: 2;
+            max-width: 1000px;
+            width: 100%;
+            text-align: center;
+        }
+    
+        .history-container h2 {
+            font-size: 40px;
+            font-weight: 500;
+            letter-spacing: -0.8px;
+            margin-bottom: 32px;
+        }
+
+        .history-container p {
+            font-size: 16px;
+            line-height: 1.8;
+            font-weight: 400;
+            text-align: justify;
+        }
+        
+        /* DRIVERS */
+        .drivers {
+            min-height: 100vh;
+            padding: 120px 80px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .drivers-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            max-width: 1400px;
+            width: 100%
+        }
+
+        .driver-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.25s ease;
+            cursor: pointer;
+        }
+
+        .driver-card img {
+            width: 100%;
+            max-width: 220px;
+            height: auto;
+            object-fit: contain;
+            margin-bottom: 8px;
+            transition: transform 0.25s ease, filter 0.25s ease;
+        }
+
+        .driver-info {
+            width: 100%;
+            max-width: 220px;
+            padding: 0;
+            text-align: center;
+        }
+
+        .driver-info h3 {
+            font-size: 15px;
+            margin: 6px 0 2px;
+            font-weight: 500;
+            letter-spacing: -0.2px;
+        }
+
+        .driver-info p {
+            font-size: 12px;
+            line-height: 1.45;
+            margin: 0;
+            opacity: 0.8;
+        }
+
+        .driver-card img:hover {
+            transform: translateY(-6px);
+            filter: drop-shadow(0 14px 30px rgba(255, 255, 255, 0.12));
+        }
+
+        /* TEAMS */
+        .teams {
+            min-height: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 40px;
+        }
+
+        .teams-container {
+            max-width: 1200px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-bottom: -120px;
+        }
+
+        .team-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .team-image {
+            width: 55%;
+            max-width: 560px;
+            display: block;
+            transition: transform 0.25s ease, filter 0.25s ease;
+        }
+
+        .team-row:hover .team-image {
+            transform: translateY(-6px);
+            filter: drop-shadow(0 10px 20px rgba(255, 255, 255, 0.15));
+        }
+
+        .team-text {
+            width: 340px;
+            padding: 16px;
+        }
+
+        .team-text p {
+            margin: 0;
+            font-size: 14px;
+            line-height: 1.45;
+        }
+
+        .team-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 6px;
+        }
+
+        .team-header img {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        /* TRACKS */
+        .tracks {
+            min-height: auto;
+            padding: 200px 60px 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .tracks h2 {
+            margin-bottom: 40px;
+            font-size: 32px;
+            font-weight: 500;
+            letter-spacing: -0.6px;
+        }
+
+        .tracks-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px 24px; 
+            max-width: 1400px;
+            width: 100%;
+        }
+
+        .tracks-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .tracks-card img {
+            width: 100%;
+            max-width: 180px;
+            height: 160px;
+            object-fit: contain;
+            margin-bottom: 10px;
+        }
+
+        .tracks-info {
+            width: 100%;
+            max-width: 180px;
+            padding: 6px 4px 0;
+            text-align: center;
+        }
+
+        .tracks-info h3 {
+            margin: 0 0 4px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .tracks-info p {
+            margin: 0;
+            font-size: 12px;
+            line-height: 1.45;
+        }
+
+        /* TIMELINE */
+        .timeline {
+            position: relative;
+            min-height: 100vh;
+            padding: 140px 60px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: url("images/background_1.jpeg") center / cover no-repeat;
+            opacity: 0.25;
+            z-index: 0;
+        }
+
+        .timeline::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.65);
+            z-index: 1;
+        }
+
+        .timeline-container {
+            position: relative;
+            z-index: 2;
+            max-width: 1400px;
+            width: 100%;
+            margin-top: 450px;
+        }
+
+        .timeline h2 {
+            text-align: center;
+            margin-bottom: 90px;
+            font-size: 32px;
+            font-weight: 500;
+        }
+
+        /* WRAPS LINE + EVENTS */
+        .timeline-track {
+            position: relative;
+        }
+
+        /* CENTER LINE */
+        .timeline-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.5);
+            transform: translateY(-50%);
+        }
+
+        /* EVENTS */
+        .timeline-events {
+            display: grid;
+            grid-template-columns: repeat(9, 1fr);
+            position: relative;
+        }
+
+        .timeline-event {
+            position: relative;
+            text-align: center;
+            font-size: 13px;
+            line-height: 1.45;
+            padding: 0 10px;
+        }
+
+        .timeline-year {
+            font-size: 30px;
+            font-weight: 500;
+            margin-bottom: 6px;
+        }
+
+        .timeline-event::before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            width: 1px;
+            background: rgba(255, 255, 255, 0.5);
+            transform: translateX(-50%);
+        }
+
+        .timeline-event.top {
+            transform: translateY(-130px);
+        }
+
+        .timeline-event.top::before {
+            top: 100%;
+            height: 130px;
+        }
+
+        .timeline-event.bottom {
+            transform: translateY(130px);
+        }
+
+        .timeline-event.bottom::before {
+            bottom: 100%;
+            height: 130px;
+        }
+
+        /* RESULTS */
+        .results {
+            min-height: 100vh;
+            padding: 120px 60px;
+        }
+
+        .results-table {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .results-table thead th {
+            text-align: left;
+            font-size: 12px;
+            font-weight: 500;
+            color: rgba(255,  255, 255, 0.6);
+            padding: 14px 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .results-table tbody td {
+            padding: 16px 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            vertical-align: middle;
+        }
+
+        .results-table tbody tr:hover {
+            background: rgba(255,  255, 255, 0.03);
+        }
+
+        .icon {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        /* LEGENDS */
+        .legend {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 60px;
+            padding-bottom: 120px;
+        }
+
+        .legend-container {
+            max-width: 1400px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 110px;
+            margin-bottom: 120px;
+        }
+
+        .legend-text {
+            width: 55%
+        }
+
+        .legend-text h2 {
+            font-size: 40px;
+            font-weight: 500;
+            letter-spacing: -0.6px;
+            margin-bottom: 24px;
+        }
+
+        .legend-text p {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 18px;
+            text-align: justify;
+        }
+
+        .legend-image {
+            width: 380px;
+            height: 380px; /* auto */
+            object-fit: cover;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            filter: grayscale(100%) contrast(1.1) brightness(0.95);
+            cursor: pointer;
+        }
+
+        .legend-image:hover {
+            transform: scale(1.05);
+        }
+
+        /* FOOTER */
+        .footer {
+            width: 100%;
+            background-color: #283039;
+            color: white;
+            padding: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .footer-content {
+            text-align: center;
+            font-size: 12px;
+            font-weight: 400;
+        }
+
+        #backToTop {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 26px;
+            background-color: #283039;
+            color: white;
+            border: none;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 400;
+            cursor: pointer;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease, transform 0.2s ease, background-color 0.2s ease;
+            z-index: 1000;
+        }
+
+        #backToTop.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        #backToTop:hover {
+            background-color: #36454f;
+            transform: translateX(-50%) scale(1.08);
+        }
+
+        .social-bar {
+            display: flex;
+            justify-content: flex-start;
+            gap: 22px;
+            padding: 30px 60px 20px;
+        }
+
+        .social-bar a {
+            color: #283039;
+            font-size: 22px;
+            transition: transform 0.25s ease, color 0.25s ease;
+        }
+
+        .social-bar a:hover {
+            color: #36454f;
+            transform: scale(1.15);
+        }
+
+        a {
+            color: #36454f;
+            text-decoration: none;
+        }
+
+        /* Underline links */
+        a:hover {
+            text-decoration: udnerline;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar" aria-label="Primary navigation">
+            <a href="#about"><span>About</span></a>
+            <a href="#drivers"><span>Drivers</span></a>
+            <a href="#history"><span>History</span></a>
+            <a href="#teams"><span>The Teams</span></a>
+            <a href="#tracks"><span>Tracks</span></a>
+            <a href="#results"><span>Results</span></a>
+            <a href="#legends"><span>The Legends</span></a>
+            <a href="#timeline"><span>Timeline</span></a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="cover">
+            <video class="cover-video" autoplay muted loop playsinline aria-hidden="true">
+                <source src="videos/cover_main.mov" type="video/mp4">
+                Your browser does not support the video tag
+            </video>
+            <div class="cover-overlay"></div>
+            <h1 class="cover-title">Formula 1</h1>
+        </section>
+
+        <!-- About -->
+         <!-- <em> and <b> tags -->
+        <section id="about" class="page about">
+            <div class="about-container">
+                <h2>About Formula 1</h2>
+                <p>
+                    Formula 1 is the <em>pinnacle of global motorsport</em>, combining <b>cutting-edge engineering</b>, 
+                    elite driver skill, and relentless competition. Since its
+                    inception in 1950, the sport has evolved into one of the most technologically
+                    advanced and widely followed championships in the world.
+
+                    <br><br>
+
+                    Each Formula 1 car is a masterpiece of innovation, designed to maximize
+                    aerodynamic efficiency, mechanical grip, and raw performance. Teams invest
+                    millions into research and development, constantly pushing the boundaries of
+                    what is physically possible on four wheels.
+
+                    <br><br>
+
+                    Beyond speed, Formula 1 is defined by its history, rivalries, and global
+                    reach. Legendary drivers, iconic teams, and historic circuits have shaped
+                    decades of unforgettable moments, while modern regulations continue to
+                    prioritize safety, sustainability, and closer racing.
+
+                    <br><br>
+
+                    Today, Formula 1 represents more than just racing — it is a fusion of
+                    science, strategy, and human determination, captivating millions of fans
+                    around the world each season.
+                </p>
+            </div>
+        </section>
+        
+        <!-- Drivers -->
+        <section id="drivers" class="page drivers">
+            <div class="drivers-grid">
+                <!-- Driver 1 -->
+                <article class="driver-card">
+                    <img src="drivers/2025ferrarilewham01right.avif" alt="Driver 1">
+                    <div class="driver-info">
+                        <h3>Lewis Hamilton</h3>
+                        <p>Ferrari<br>Season position: 6th<br>Season points: 156</p>
+                    </div>
+                </article>
+
+                <article class="driver-card">
+                    <img src="drivers/2025mercedesgeorus01right.avif" alt="Driver 2">
+                    <div class="driver-info">
+                        <h3>George Russell</h3>
+                        <p>Mercedes<br>Season position: 4th<br>Season points: 319</p>
+                    </div>
+                </article>
+
+                <article class="driver-card">
+                    <img src="drivers/2025mclarenlannor01right.avif" alt="Driver 3">
+                    <div class="driver-info">
+                        <h3>Lando Norris</h3>
+                        <p>McLaren<br>Season position: 1st<br> Season points: 423</p>
+                    </div>
+                </article>
+
+                <article class="driver-card">
+                    <img src="drivers/2025redbullracingmaxver01right.avif" alt="Driver 4">
+                    <div class="driver-info">
+                        <h3>Max Verstappen</h3>
+                        <p>Red Bull Racing<br>Season positon: 2nd<br>Season points: 421</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="drivers" class="page drivers">
+            <div class="drivers-grid">
+                <article class="driver-card">
+                    <img src="drivers/2025mercedesandant01right.avif" alt="Driver 5">
+                    <div class="driver-info">
+                        <h3>Kimi Antonelli</h3>
+                        <p>Mercedes<br>Season position: 7th<br>Season points: 150</p>
+                    </div>
+                </article>
+
+                <article class="driver-card">
+                    <img src="drivers/2025williamsalealb01right.avif" alt="Driver 6">
+                    <div class="driver-info">
+                        <h3>Alexander Albon</h3>
+                        <p>Williams<br>Season position: 8th<br>Season points: 64</p>
+                    </div>
+                </article>
+
+                <article class="driver-card">
+                    <img src="drivers/2025ferrarichalec01right.avif" alt="Driver 7">
+                    <div class="driver-info">
+                        <h3>Charles Leclerc</h3>
+                        <p>Ferrari<br>Season position: 5th<br>Season points: 242</p>
+                    </div>
+                </article>
+
+                <article class="driver-card">
+                    <img src="drivers/2025haasestoco01right.avif" alt="Driver 8">
+                    <div class="driver-info">
+                        <h3>Esteban Ocon</h3>
+                        <p>Haas F1 Team<br>Season position: 15th<br>Season points: 38</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- History -->
+        <section id="history" class="page history">
+            <div class="history-container">
+                <h2>History</h2>
+                <p>
+                    Formula 1 began in 1950 as the world's premier single-seater racing championship,
+                    bringing together manufacturers, engineers, and drivers in pursuit of ultimate
+                    speed. From its earliest days, the sport represented a fusion of human bravery
+                    and mechanical innovation, raced on both permanent circuits and public roads.   
+                </p>
+                <p>
+                    The 1960s and 1970s marked a period of rapid evolution. Rear-engine designs,
+                    aerodynamic wings, and advances in chassis construction transformed how cars
+                    performed and how drivers approached racing. Safety, once secondary, became an
+                    increasingly important focus following a series of tragic accidents.
+                <p>
+                    The turbo era of the 1980s pushed engineering to extremes, producing cars with
+                    extraordinary power. This was followed by an era of refinement, reliability,
+                    and dominance by teams that mastered consistency and precision.
+                </p>
+                <p>
+                    In the modern age, Formula 1 stands at the forefront of technology. Hybrid power
+                    units, advanced aerodynamics, and data-driven development define competition,
+                    while the sport continues to balance innovation with sustainability and safety.
+                </p>
+                <p>
+                    Across decades, Formula 1 has remained more than a championship — it is a
+                    constantly evolving story of rivalry, progress, and the relentless pursuit
+                    of performance.
+                </p>
+            </div>
+        </section>
+
+        <!-- Teams Page 1 -->
+        <section id="teams" class="page teams">
+            <div class="teams-container">
+                <!-- Mercedes -->
+                <figure class="team-row">
+                    <img src="teams/2025mercedescarright.avif" alt="Mercedes F1 car" class="team-image">
+                    <figcaption class="team-text">
+                        <div class="team-header">
+                            <img src="team_icons/mercedes.jpg" alt="Mercedes logo">
+                            <h3>Mercedes</h3>
+                        </div>
+                        <p>
+                            Mercedes' modern F1 revival started with the creation of a works squad for 
+                            2010 - the platform for a meteoric rise up the Grand Prix order. 
+                            The team generated huge excitement from the off with the sensational return of 
+                            Michael Schumacher, but headlines soon followed on track: three podiums in 
+                            their debut season, all via Nico Rosberg - who then claimed a breakthrough 
+                            pole/victory double at China in 2012.
+                        </p>
+                    </figcaption>
+                </figure>
+
+                <figure class="team-row">
+                    <img src="teams/2025mclarencarright.avif" alt="McLaren F1 car" class="team-image">
+                    <figcaption class="team-text">
+                        <div class="team-header">
+                            <img src="team_icons/mclaren.jpg" alt="McLaren logo">
+                            <h3>McLaren</h3>
+                        </div>
+                        <p>
+                            Since entering the sport in 1966 under the guidance and restless endeavour of 
+                            eponymous founder Bruce, McLaren's success has been nothing short of breathtaking. 
+                            Five glittering decades have yielded countless victories, pole positions and podiums, 
+                            not to mention nine constructors' championships. What's more, some of the sport's 
+                            greatest drivers made their names with the team, including Emerson Fittipaldi, 
+                            Ayrton Senna, Mika Hakkinen and Lewis Hamilton.
+                        </p>
+                    </figcaption>
+                </figure>
+
+                <figure class="team-row">
+                    <img src="teams/2025ferraricarright.avif" alt="Ferarri F1 car" class="team-image">
+                    <figcaption class="team-text">
+                        <div class="team-header">
+                            <img src="team_icons/ferrari.webp" alt="Ferrari logo">
+                            <h3>Ferrari</h3>
+                        </div>
+                        <p>
+                            For many, Ferrari and Formula 1 racing have become inseparable. The only team to 
+                            have competed in every season since the world championship began, the Prancing Horse 
+                            has grown from the humble dream of founder Enzo Ferrari to become one of the most 
+                            iconic and recognised brands in the world.
+                        </p>
+                    </figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <!-- Teams Page 2 -->
+        <section id="teams" class="page teams">
+            <div class="teams-container">
+                <figure class="team-row">
+                    <img src="teams/2025redbullracingcarright.avif" alt="Redbull Racing F1 car" class="team-image">
+                    <figcaption class="team-text">
+                        <div class="team-header">
+                            <img src="team_icons/redbullracing.jpg" alt="Rebull Racing logo">
+                            <h3>Redbull Racing</h3>
+                        </div>
+                        <p>
+                            Red Bull were no strangers to F1 - as sponsors - prior to formally entering as a 
+                            works team in 2004. Nonetheless, the scale of their success over the following 
+                            decade was staggering. After a first podium in 2006, the team hit their stride in 2009, 
+                            claiming six victories and second in the constructors' standings. 
+                            Over the next four seasons they were a tour de force, claiming consecutive title doubles 
+                            between 2010 and 2013, with Sebastian Vettel emerging as the sport's youngest quadruple champion.
+                        </p>
+                    </figcaption>
+                </figure>
+
+                <figure class="team-row">
+                    <img src="teams/2025williamscarright.avif" alt="Williams F1 car" class="team-image">
+                    <figcaption class="team-text">
+                        <div class="team-header">
+                            <img src="team_icons/williams.webp" alt="Williams logo">
+                            <h3>Williams</h3>
+                        </div>
+                        <p>
+                            Driven on by the brilliance and passion of the late Sir Frank Williams, Williams 
+                            grew from humble beginnings to become a Formula 1 behemoth, unrivalled by all except 
+                            Ferrari and McLaren in terms of enduring success. Over the past four decades the team 
+                            has racked up Grand Prix wins and championship glory, and in the process nurtured 
+                            some of the greatest talents in the sport, both in and out the cockpit. 
+                            And, following the Williams family's decision to step aside after the 2020 sale of 
+                            the team to Dorilton Capital, a new era has begun.
+                        </p>
+                    </figcaption>
+                </figure>
+
+                <figure class="team-row">
+                    <img src="teams/2025racingbullscarright.avif" alt="Racing Bulls F1 car" class="team-image">
+                    <figcaption class="team-text">
+                        <div class="team-header">
+                            <img src="team_icons/racingbulls.webp" alt="Racing Bulls logo">
+                            <h3>Racing Bulls</h3>
+                        </div>
+                        <p>
+                            Established in 2006 as a squad in which young drivers from Red Bull's prodigious 
+                            talent pool could cut their F1 teeth, Racing Bulls - originally named Toro Rosso, 
+                            then AlphaTauri, then RB - were formed from the ashes of the plucky Minardi team. 
+                        </p>
+                    </figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <!-- Tracks -->
+        <section id="tracks" class="page tracks">
+            <!-- <h2>The Tracks</h2> -->
+            <div class="tracks-grid">
+                <article class="tracks-card">
+                    <img src="tracks/cota.png" alt="Circuit of the Americas">
+                    <div class="tracks-info">
+                        <h3>Circuit Of The Americas</h3>
+                        <p>Modern, technical circuit with dramatic elevation changes.</p>
+                    </div>
+                </article>
+
+                <article class="tracks-card">
+                    <img src="tracks/road_america.png" alt="Road America track">
+                        <div class="tracks-info">
+                            <h3>Road America</h3>
+                            <p>High-speed straights combined with flowing corners</p>
+                        </div>
+                </article>
+
+                <article class="tracks-card">
+                    <img src="tracks/monaco.png" alt="Monaco track">
+                    <div class="tracks-info">
+                        <h3>Monaco</h3>
+                        <p>Tight street circuit demanding precision and control</p>
+                    </div>
+                </article>
+
+                <article class="tracks-card">
+                    <img src="tracks/nurburgring.png" alt="Nurburgring track">
+                    <div class="tracks-info">
+                        <h3>Nurburgring</h3>
+                        <p>Historic track known for its complexity and challenge.</p>
+                    </div>
+                </article>
+
+                <article class="tracks-card">
+                    <img src="tracks/monaco.png" alt="Monza track">
+                    <div class=" tracks-info">
+                        <h3>Monza</h3>
+                        <p>The Temple of Speed with iconic long straights</p>
+                    </div>
+                </article>
+
+                <article class="tracks-card">
+                    <img src="tracks/laguna_seca.png" alt="Laguna Seca track">
+                    <div class="tracks-info">
+                        <h3>Laguna Seca</h3>
+                        <p>Famous for the dramatic Corkscrew corner</p>
+                    </div>
+                </article>
+
+                <article class="tracks-card">
+                    <img src="tracks/suzuka.png" alt="Suzuka track">
+                    <div class="tracks-info">
+                        <h3>Suzuka</h3>
+                        <p>Unique figure-eight layout testing driver skill</p>
+                    </div>
+                </article>
+
+                <article class="tracks-card">
+                    <img src="tracks/circuit_de_spa-francorchamps.png" alt="Circ de Spa-Francorchamps">
+                    <div class="tracks-info">
+                        <h3>Circuit de Spa-Fran</h3>
+                        <p>Fast, flowing circuit with iconic Eau Rouge</p>
+                    </div>
+                </article>
+            </div>                          
+        </section>
+
+        <!-- Timeline -->
+        <section id="timeline" class="page timeline">
+            <h2>Timeline</h2>
+            <div class="timeline-container">
+
+                <div class="timeline-track">
+                    <div class="timeline-line"></div>
+
+                    <div class="timeline-events">
+                        <article class="timeline-event top">
+                            <div class="timeline-year">1950</div>
+                            Formula 1 World Championship begins at Silverstone.
+                        </article>
+
+                        <article class="timeline-event bottom">
+                            <div class="timeline-year">1960s</div>
+                            Aerodynamics and rear-engine designs reshape racing.
+                        </article>
+
+                        <article class="timeline-event top">
+                            <div class="timeline-year">1970s</div>
+                            Safety advancements redefine car and circuit standards.
+                        </article>
+
+                        <article class="timeline-event bottom">
+                            <div class="timeline-year">1980s</div>
+                            Turbocharged engines dominate Formula 1.
+                        </article>
+
+                        <article class="timeline-event top">
+                            <div class="timeline-year">1994</div>
+                            Tragic season leads to sweeping safety reforms.
+                        </article>
+
+                        <article class="timeline-event bottom">
+                            <div class="timeline-year">2000s</div>
+                            Ferrari defines an era of dominance.
+                        </article>
+
+                        <article class="timeline-event top">
+                            <div class="timeline-year">2014</div>
+                            Hybrid power units introduced.
+                        </article>
+
+                        <article class="timeline-event bottom">
+                            <div class="timeline-year">2021</div>
+                            Historic championship decided in final race.
+                        </article>
+
+                        <article class="timeline-event top">
+                            <div class="timeline-year">2022</div>
+                            Ground-effect regulations return.
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results -->
+        <section id="results" class="page results">
+            <table class="results-table">
+                <thead>
+                    <tr>
+                        <th scope="col">GRAND PRIX</th>
+                        <th scope="col">DATE</th>
+                        <th scope="col">WINNER</th>
+                        <th scope="col">TEAM</th>
+                        <th scope="col">LAPS</th>
+                        <th scop="col">TIME</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>
+                            <img src="countries/australia.webp" class="icon">Australia
+                        </td>
+                        <td>16 Mar</td>
+                        <td>Lando Norris</td>
+                        <td>
+                            <img src="team_icons/mclaren.jpg" class="icon">McLaren
+                        </td>
+                        <td>57</td>
+                        <td>1:42:06.304</td>
+                    </tr> 
+
+                    <tr>
+                        <td>
+                            <img src="countries/china.png" class="icon">China
+                        </td>
+                        <td>23 Mar</td>
+                        <td>Oscar Piastri</td>
+                        <td>
+                            <img src="team_icons/mclaren.jpg" class="icon">McLaren
+                        </td>
+                        <td>56</td>
+                        <td>1:30:55.026</td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <img src="countries/japan.svg" class="icon">Japan
+                        </td>
+                        <td>06 Apr</td>
+                        <td>Max Verstappen</td>
+                        <td>
+                            <img src="team_icons/redbullracing.jpg" class="icon">Redbull Racing
+                        </td>
+                        <td>53</td>
+                        <td>1:22:06.983</td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <img src="countries/bahrain.png" class="icon">Bahrain
+                        </td>
+                        <td>13 Apr</td>
+                        <td>Oscar Piastri</td>
+                        <td>
+                            <img src="team_icons/mclaren.jpg" class="icon">McLaren
+                        </td>
+                        <td>57</td>
+                        <td>1:35:39.435</td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <img src="countries/saudi.webp" class="icon">Saudi Arabia
+                        </td>
+                        <td>20 Apr</td>
+                        <td>Oscar Piastri</td>
+                        <td>
+                            <img src="team_icons/mclaren.jpg" class="icon">McLaren 
+                        </td>
+                        <td>50</td>
+                        <td>1:21:06.758</td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <img src="countries/monaco.png" class="icon">Monaco
+                        </td>
+                        <td>25 May</td>
+                        <td>Lando Norris</td>
+                        <td>
+                            <img src="team_icons/mclaren.jpg" class="icon">McLaren
+                        </td>
+                        <td>78</td>
+                        <td>1:40:33.843</td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <img src="countries/spain.webp" class="icon">Spain
+                        </td>
+                        <td>01 Jun</td>
+                        <td>Oscar Piastri</td>
+                        <td>
+                            <img src="team_icons/mclaren.jpg" class="icon">McLaren
+                        </td>
+                        <td>66</td>
+                        <td>1:32:57.375</td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <img src="countries/canada.png" class="icon">Canada
+                        </td>
+                        <td>15 Jun</td>
+                        <td>George Russell</td>
+                        <td>
+                            <img src="team_icons/mercedes.jpg" class="icon">Mercedes
+                        </td>
+                        <td>70</td>
+                        <td>1:31:52.688</td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <img src="countries/austria.png" class="icon">Austria
+                        </td>
+                        <td>29 Jun</td>
+                        <td>Lando Norris</td>
+                        <td>
+                            <img src="team_icons/mclaren.jpg" class="icon">McLaren
+                        </td>
+                        <td>70</td>
+                        <td>1:23:47.693</td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <img src="countries/britain.png" class="icon">Great Britain
+                        </td>
+                        <td>06 Jul</td>
+                        <td>Lando Norris</td>
+                        <td>
+                            <img src="team_icons/mclaren.jpg" class="icon">McLaren
+                        </td>
+                        <td>52</td>
+                        <td>1:37:15.735</td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <img src="countries/emilia.webp" class="icon">Italy
+                        </td>
+                        <td>07 Sep</td>
+                        <td>Max Verstappen</td>
+                        <td>
+                            <img src="team_icons/redbullracing.jpg" class="icon">Redbull Racing
+                        </td>
+                        <td>53</td>
+                        <td>1:13:24.325</td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <img src="countries/singapore.png" class="icon">Singapore
+                        </td>
+                        <td>05 Oct</td>
+                        <td>George Russell</td>
+                        <td>
+                            <img src="team_icons/mercedes.jpg" class="icon">Mercedes
+                        </td>
+                        <td>62</td>
+                        <td>1:40:22.367</td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <img src="countries/brazil.png" class="icon">Brazil
+                        </td>
+                        <td>09 Nov</td>
+                        <td>Lando Norris</td>
+                        <td>
+
+                            <img src="team_icons/mclaren.jpg" class="icon">McLaren
+                        </td>
+                        <td>71</td>
+                        <td>1:37:58.574</td>
+                    </tr>
+                </body>
+            </table>
+        </section>
+
+        <!-- Legends Page 1-->
+        <section id="legends" class="page legends">
+            <div class="legend-container">
+                <img src="legends/nino.avif" alt="Nino Farina" class="legend-image">
+                <div class="legend-text">
+                    <h2>Nino Farina</h2>
+                    <p>
+                        The first ever Formula 1 World Champion came from a privileged background and had a stylish driving technique that was adopted by many drivers. 
+                        A hard and determined racer, Farina relied on a combination of profound self belief and raw courage to compensate for the superior skills possessed 
+                        by many of his more naturally talented opponents. Yet he also drove recklessly and few Formula 1 drivers ever competed with such apparent disregard for their personal safety. 
+                        Somehow surviving an accident-strewn racing career, he was eventually killed in a road accident.
+                    </p>
+                    <p>
+                        Giuseppe Antonio 'Nino' Farina was always destined to be involved in the automotive world, 
+                        though not necessarily as a driver. On the day of his son's birth, October 30, 1906, Nino's father Giovanni 
+                        established Stabilimente Farina, a bodywork shop in Turin, the industrial city where much of Italy's car 
+                        manufacturing industry was located. Here also, Giovanni's brother founded the coachbuilding firm of Pininfarina, 
+                        later famed for designing many sleek Italian sportscars. From an early age Nino was expected to join the family business 
+                        but his first driving experience, at the age of nine in a small car on the grounds of his father's factory, whetted his 
+                        appetite for the sporting side of motoring. When he was 16 Nino accompanied his favourite uncle Pinin as a passenger in a 
+                        race. Three years later his first solo competition ended in an accident, establishing a worrying trend that continued 
+                        throughout his crash-prone career.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Legends Page 2 -->
+        <section id="legends" class="page legends">
+            <div class="legend-container">
+                <img src="legends/juanmanuel.avif" alt="Juan Manuel Fangio" class="legend-image">
+                <div class="legend-text">
+                    <h2>Juan Manuel Fangio</h2>
+                    <p>
+                        Many consider him to be the greatest driver of all time. In seven full Formula 1 seasons 
+                        (he missed one recovering from a nearly fatal injury) he was World Champion five times 
+                        (with four different teams) and runner-up twice. In his 51 championship Grands Prix he started from the 
+                        front row 48 times (including 29 pole positions) and set 23 fastest race laps en route to 
+                        35 podium finishes, 24 of them victories. His superlative track record was achieved by some of the greatest 
+                        displays of skill and daring ever seen. Fangio did it all with style, grace, nobility and a sense of 
+                        honour never seen before or since.
+                    </p>
+                    <p>
+                        Fangio flourished in Formula 1 racing when the world championship was in its infancy and he was a 
+                        comparatively 'Old Man' - which is what his admiring rivals called the aging genius who won his last 
+                        driving title in 1957, when he was 46. Most of his challengers were young enough to be his sons, and nearly 
+                        all of them came from privileged backgrounds far removed from Fangio's humble origins in a remote corner of 
+                        Argentina, in the dusty frontier town of Balcarce. His father and mother, hard-working immigrants from the 
+                        Abruzzi region of Italy to whom Fangio was deeply devoted, raised their six children (three boys and three 
+                        girls) to believe in God and the dignity of labour. Fangio credited his parents with instilling in him 
+                        the virtues of honesty and integrity, self-discipline, respect for others and the sense of 
+                        responsibility that characterized his approach to life.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Legends Page 3 -->
+        <section id="legends" class="page legends">
+            <div class="legend-container">
+                <img src="legends/alberto.avif" alt="Alberto Ascari" class="legend-image">
+                <div class="legend-text">
+                    <h2>Alberto Ascari</h2>
+                    <p>
+                        The son of one of Italy's great pre-war drivers, Alberto Ascari went on to become one of Formula 1 racing's most dominant 
+                        and best-loved champions. Noted for the careful precision and finely-judged accuracy that made him one of the safest drivers in a 
+                        most dangerous era, he was also notoriously superstitious and took great pains to avoid tempting fate. But his unexplained fatal 
+                        accident - at exactly the same age as his father's, on the same day of the month and in eerily similar circumstances - remains one of 
+                        Formula 1 racing's great unsolved mysteries.
+                    </p>
+                    <p>
+                        Alberto Ascari, born in Milan on July 13, 1918, was just seven years old when his famous father Antonio, the reigning European champion, 
+                        was killed while leading the French Grand Prix at Montlhery. By that time little Alberto was already immersed in his father's milieu, 
+                        having met the many big names in racing, including Antonio's close friend Enzo Ferrari, who frequented the thriving Ascari Fiat 
+                        dealership in Milan. Despite the tragic loss of his beloved father Alberto succumbed to the lure of racing. His famous name helped get 
+                        him started, though it was on two wheels, not four, when, as a 19-year-old he was hired to ride for the Bianchi motorcycle team. 
+                        His first four-wheel foray came in the 1940 Mille Miglia, where Enzo Ferrari gave him a ride in a Tipo 815 Spyder. 
+                        When Italy entered World War II the Ascari garage in Milan, now run by Alberto, was conscripted to service and maintain military vehicles. 
+                        During the war years he also established a transport business, supplying fuel to Italian army depots in North Africa. His partner in this 
+                        enterprise was Luigi Villoresi, a racing driver with whom he developed a father-son relationship. By the end of the war Alberto was a family man, 
+                        having married Mietta and become the father of Patrizia and Antonio, who was named after his celebrated grandfather.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Legends Page 4 -->
+        <section id="legends" class="page legends">
+            <div class="legend-container">
+                <img src="legends/philhall.avif" alt="Phil Hall" class="legend-image">
+                <div class="legend-text">
+                    <h2>Phil Hall</h2>
+                    <p>
+                        The first American to become World Champion had a love/hate relationship with the sport. Profoundly intelligent and deeply sensitive, 
+                        he was also remarkably candid about personal demons that caused inner turmoil and made his racing life a bittersweet experience. 
+                        He was always fearful and throughout his career he struggled to find a balance between the perils and pleasures of his profession. 
+                        Yet driving became a way of expressing himself and racing took him on a journey to places he never expected to go.
+                    </p>
+                    <p>
+                        Philip Toll Hill, Jr was born into a prominent family in Miami, Florida, on April 20, 1927. Not particularly close to his parents, 
+                        he became an introverted child with an inferiority complex and few friends. Not good at sports, he feared failure and ridicule and was 
+                        consumed by feelings of inadequacy. Music became an outlet and he learned to play the piano, then became fascinated by cars. 
+                        When he was 12 his favourite aunt bought him a Model T Ford, which he took apart many times to understand how it worked, and his aunt's 
+                        chauffeur taught him how to drive. His burgeoning automotive skills gave him increasing self-confidence, though he still felt aimless and 
+                        socially awkward.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Legends Page 5 -->
+        <section id="legends" class="page legends">
+            <div class="legend-container">
+                <img src="legends/johnsurtees.avif" alt="John Surtees" class="legend-image">
+                <div class="legend-text">
+                    <h2>John Surtees</h2>
+                    <p>
+                        Famed as the only World Champion on both two and four wheels, John Surtees rode motorcycles and drove Formula 1 cars with equal skill and bravery. 
+                        He made the leap from bikes to cars with surprising ease, though his quick climb to the pinnacle of motorsport was also the result of a great 
+                        deal of hard effort by a serious-minded driver whose fierce independence ultimately proved to be a handicap. Having won the driving title at 
+                        Ferrari, he left after a violent argument and was thereafter ill-equipped to win consistently.
+                    </p>
+                    <p>
+                        His family background gave John Surtees a head start on motorcycles. His father Jack, who owned a motorcycle shop in South London, was a 
+                        three-time British motorcycle sidecar champion. The eldest of three children, John was born on February 11, 1934, and by the time he was 11 
+                        he had a bike of his own and could ride and repair it with equal skill. At 16 he left school and became an apprentice engineer at the 
+                        Vincent motorcycle factory. A year later he competed in his first solo race and won it. In 1955 he became a member of the Norton works team and 
+                        rode to victory 68 times in 76 races. From 1956 to 1960 he raced 350cc and 500cc bikes for the famed Italian MV Agusta team and won seven world 
+                        championships.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Legends Page 6 -->
+        <section id="legends" class="page legends">
+            <div class="legend-container">
+                <img src="legends/jackiestewart.avif" alt="Jackie Stewart" class="legend-image">
+                <div class="legend-text">
+                    <h2>Jackie Stewart</h2>
+                    <p>
+                        His outstanding track record still ranks him among the most successful champions, yet in terms of personally influencing the way Formula 1 
+                        racing developed Jackie Stewart stands alone. His one-man safety crusade made the sport much safer. His excellent communication skills 
+                        helped make it more popular. He set new standards of professionalism for drivers and was also a pioneer in exploiting Formula 1 racing's 
+                        commercial potential. His keen intelligence and tireless energy helped, but he would never have been able to exert such influence had he 
+                        not been a truly great driver.
+                    </p>
+                    <p>
+                        John Young 'Jackie' Stewart was born in Dumbartonshire, Scotland, on June 11, 1939. His father owned a garage business and Jackie's older 
+                        brother Jimmy was the first in the family to try racing, though his mother disapproved. There were also fears about Jackie's future because 
+                        he was a failure at school and left at 15. Only later was he diagnosed as suffering from severe dyslexia - which made his subsequent 
+                        achievements even more remarkable. While still a teenager he took up clay pigeon shooting and became one of the best shots in Britain. 
+                        When he began racing saloons and sportscars he quickly showed outstanding talent that prompted team entrant Ken Tyrrell to hire him to contest 
+                        the 1963 British Formula 3 series, in which the speedy Scot won seven races in a row.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Legends Page 7 -->
+        <section id="legends" class="page legends">
+            <div class="legend-container">
+                <img src="legends/alanjones.avif" alt="Alan Jones" class="legend-image">
+                <div class="legend-text">
+                    <h2>Alan Jones</h2>
+                    <p>
+                        A straight-talking, iron-willed, hard-driving tough guy, Alan Jones fought his way to the forefront, 
+                        where he defended his territory with ruthless determination and large doses of intimidation. 
+                        His belligerence was partly a by-product of a long and hard struggle to make it to Formula 1 racing in the first place. 
+                        Once there, he was considered little more than a journeyman driver, until he teamed up with the then equally undistinguished Williams team. 
+                        Together, they took on the world and beat it, with AJ becoming the prototypical Williams driver.
+                    </p>
+                    <p>
+                        His father Stan Jones, an affluent car dealer, was one of Australia's top racers who in the mid-1950s was good enough to be offered 
+                        tryouts in Europe (with BRM and Ferrari) but declined them in order to stay home and look after his business and his family. 
+                        Alan Stanley Jones, born in Melbourne on November 2, 1946, was inspired by his father's successes and encouraged by him to have a go himself. 
+                        At 15 he was a kart racing champion and soon also went well in a Mini and in one of his father's single-seater Coopers. 
+                        Further progress was delayed when Stan Jones went bankrupt in an Australian economic recession. In 1967 Alan managed to scrape together enough 
+                        cash to finance a traditional Australian tour of England and Europe. During this trip he decided that any future in motorsport would have to be 
+                        pursued abroad.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Legends Page 8 -->
+        <section id="legends" class="page legends">
+            <div class="legend-container">
+                <img src="legends/nelson.avif" alt="Nelson Piquet" class="legend-image">
+                <div class="legend-text">
+                    <h2>Nelson Piquet</h2>
+                    <p>
+                        He was never a dominant driver but a crafty expert in winning by stealth, according to his detractors. 
+                        He admitted he was lazy, yet willingly worked hard to improve his car. He could be cold and cruel but could also be warm and funny. 
+                        He hated being a celebrity yet lived the life of a playboy to the hilt. He was never hugely popular but couldn't care less. 
+                        All Nelson Piquet really cared about was driving a racing car, which he loved with a passion, especially when he won, which he did often enough 
+                        to become a triple World Champion.
+                    </p>
+                    <p>
+                        Born Nelson Sautomaior, on August 17, 1952, he used his mother's surname Piquet to hide his early racing adventures from his disapproving parents. 
+                        His father, a prominent Brazilian government minister, had been a regional tennis champion and when Nelson showed early promise in that sport 
+                        he was encouraged to pursue it. At 12 he was one of Brazil's most promising junior prospects. At 16, to further hone his tennis skills, 
+                        his parents enrolled him at a school in California. But whacking a ball around a tennis court began to take second place in Nelson's mind 
+                        to driving a car around a race track, particularly when his countryman Emerson Fittipaldi started making inroads abroad. And so Nelson Piquet 
+                        began racing in his home state of Brazilia. Winning championships in karts and sportscars failed to win over his parents, who sought to distract 
+                        him by sending him to university. But studying philosophy, engineering and management proved no substitute for the lure of racing and Nelson 
+                        dropped out after a year. He sold his road car to buy a Formula Vee and in 1977 became the Brazilian champion in that category.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Socials -->
+    <aside class="social-bar">
+        <a href="https://www.facebook.com/Formula1" target="_blank" aria-label="Facebook">
+            <i class="fa-brands fa-facebook-f"></i>
+        </a>
+        <a href="https://www.instagram.com/f1" target="_blank" aria-label="Instagram">
+            <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="https://twitter.com/F1" target="_blank" aria-label="Twitter">
+            <i class="fa-brands fa-x-twitter"></i>
+        </a>
+        <a href="https://www.youtube.com/@Formula1" target="_blank" aria-label="YouTube">
+            <i class="fa-brands fa-youtube"></i>
+        </a>
+    </aside>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 Keeno Smith. All Right Reserved</p>
+        </div>
+    </footer>
+    
+    <button id="backToTop" aria-label="Back to top button">↑</button>
+
+    <script>
+        const backToTop = document.getElementById("backToTop");
+        const footer = document.querySelector("footer");
+
+        window.addEventListener("scroll", () => {
+            const scrollY = window.scrollY;
+            const showPoint = 300;
+
+            if (scrollY > showPoint) {
+                backToTop.classList.add("show");
+            } else {
+                backToTop.classList.remove("show");
+            }
+
+            if (footer) {
+                const footerReact = footer.getBoundingClientRect();
+                const overlapOffset = 20;
+
+                if (footerReact.top < window.innerHeight) {
+                    backToTop.style.bottom = window.innerHeight - footerReact.top + overlapOffset + "px";
+                } else {
+                    backToTop.style.bottom = "40px";
+                }
+            }
+        });
+
+            backToTop.addEventListener("click", () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+            });
+    </script>
+</body>
+</html>
